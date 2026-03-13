@@ -11,7 +11,7 @@ import lightgbm as lgb
 
 
 # Chargement du dataset
-df = pd.read_csv(r"C:\Users\user\Documents\predection heart failure\nouvelle dataset equilibrée.csv")
+df = pd.read_csv(r"data\nouvelle dataset equilibrée.csv")
 
 X = df.drop("DEATH_EVENT", axis=1)
 y = df["DEATH_EVENT"]
@@ -32,8 +32,8 @@ def train_random_forest(X_train, y_train):
         random_state=42
     )
     model.fit(X_train, y_train)
-    joblib.dump(model, "models/heart_model.pkl")
-    print("Random Forest sauvegardé : models/heart_model.pkl")
+    joblib.dump(model, "scr/heart_model.pkl")
+    print("Random Forest sauvegardé : scr/heart_model.pkl")
 
 
 # ─── XGBoost ─────────────────────────────────────────────
@@ -47,8 +47,8 @@ def train_xgboost(X_train, y_train):
         eval_metric="logloss"
     )
     model.fit(X_train, y_train)
-    joblib.dump(model, "models/heart_model_xgb.pkl")
-    print("XGBoost sauvegardé : models/heart_model_xgb.pkl")
+    joblib.dump(model, "scr/heart_model_xgb.pkl")
+    print("XGBoost sauvegardé : scr/heart_model_xgb.pkl")
 
 
 # ─── LightGBM ────────────────────────────────────────────
@@ -64,8 +64,8 @@ def train_lightgbm(X_train, y_train):
         verbose=-1
     )
     model.fit(X_train, y_train)
-    joblib.dump(model, "models/heart_model_lgbm.pkl")
-    print("LightGBM sauvegardé : models/heart_model_lgbm.pkl")
+    joblib.dump(model, "scr/heart_model_lgbm.pkl")
+    print("LightGBM sauvegardé : scr/heart_model_lgbm.pkl")
 
 
 # ─── Logistic Regression ─────────────────────────────────
@@ -80,8 +80,8 @@ def train_logistic_regression(X_train, y_train):
         ))
     ])
     model.fit(X_train, y_train)
-    joblib.dump(model, "models/heart_model_lr.pkl")
-    print("Logistic Regression sauvegardée : models/heart_model_lr.pkl")
+    joblib.dump(model, "scr/heart_model_lr.pkl")
+    print("Logistic Regression sauvegardée : scr/heart_model_lr.pkl")
 
 
 # ─── Lancement ───────────────────────────────────────────
@@ -90,5 +90,6 @@ train_random_forest(X_train, y_train)
 train_xgboost(X_train, y_train)
 train_lightgbm(X_train, y_train)
 train_logistic_regression(X_train, y_train)
+
 
 print("\nTous les modèles sont entraînés et sauvegardés.")

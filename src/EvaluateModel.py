@@ -39,10 +39,10 @@ def evaluer_modele(nom, model):
 
 
 # ─── Chargement des modèles ✅ noms corrects ──────────────
-model_rf  = joblib.load("scr/heart_model.pkl")
-model_xgb = joblib.load("scr/heart_model_xgb.pkl")
-model_lgb = joblib.load("scr/heart_model_lgbm.pkl")
-model_lr  = joblib.load("scr/heart_model_lr.pkl")
+model_rf  = joblib.load("src/heart_model.pkl")
+model_xgb = joblib.load("src/heart_model_xgb.pkl")
+model_lgb = joblib.load("src/heart_model_lgbm.pkl")
+model_lr  = joblib.load("src/heart_model_lr.pkl")
 
 
 # ─── Évaluation de tous les modèles ──────────────────────

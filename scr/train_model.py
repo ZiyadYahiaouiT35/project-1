@@ -11,7 +11,7 @@ import lightgbm as lgb
 
 
 # Chargement du dataset
-df = pd.read_csv(r"data\nouvelle dataset equilibrée.csv")
+df = pd.read_csv(r"data\nouvelle_dataset_equilibree.csv")
 
 X = df.drop("DEATH_EVENT", axis=1)
 y = df["DEATH_EVENT"]
@@ -80,7 +80,7 @@ def train_logistic_regression(X_train, y_train):
         ))
     ])
     model.fit(X_train, y_train)
-    joblib.dump(model, "scr/heart_model_lr.pkl")
+    joblib.dump(model, "src/heart_model_lr.pkl")
     print("Logistic Regression sauvegardée : scr/heart_model_lr.pkl")
 
 

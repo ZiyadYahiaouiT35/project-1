@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 
 
 # ─── Chargement des données ───────────────────────────────
-df = pd.read_csv("data\nouvelle_dataset_equilibree.csv")
+df = pd.read_csv("data/nouvelle_dataset_equilibree.csv")
 
 X = df.drop("DEATH_EVENT", axis=1)
 y = df["DEATH_EVENT"]

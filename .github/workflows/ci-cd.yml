@@ -1,0 +1,56 @@
+name: CI/CD Pipeline
+
+# This triggers the workflow on pushes and pull requests to the main branch
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  # Continuous Integration (CI) - Testing
+  test:
+    name: Run Automated Tests
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10' # Update this to match your project's Python version
+        cache: 'pip'
+
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        # Install project requirements
+        pip install -r requirements.txt
+        # Ensure testing libraries like pytest are installed
+        pip install pytest 
+
+    - name: Run Tests
+      # This looks for your tests folder and runs all test files
+      run: |
+        pytest tests/
+
+  # Continuous Deployment/Delivery (CD) - Docker Build
+  build:
+    name: Build Docker Image
+    needs: test # This ensures the build ONLY runs if the tests pass
+    runs-on: ubuntu-latest
+    
+    # Optional: Only run the build step when pushing directly to main (not on PRs)
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag heart-failure-app:latest
+      
+    # NOTE: To push this to DockerHub or GitHub Container Registry, 
+    # you would add docker login and docker push commands here.
